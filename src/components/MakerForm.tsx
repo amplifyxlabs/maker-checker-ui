@@ -1,79 +1,98 @@
 
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "./ui/select";
-import { Textarea } from "./ui/textarea";
-import { Upload, Download, Play } from "lucide-react";
-import { Card } from "./ui/card";
+import React from 'react';
 
 export function MakerForm() {
+  const mockData = [
+    { id: 'BATCH-0001', appCode: 'MSTRINT', matrixType: 'MSTRINT', uploadedBy: '123', uploadedDate: '2025-02-04T11:20:52', approvalStatus: 'Approved', makerComments: 'Test', checkerComments: '' },
+    { id: 'BATCH-0002', appCode: 'SPL', matrixType: 'CPB', uploadedBy: '123', uploadedDate: '2025-02-04T12:38:18', approvalStatus: 'Approved', makerComments: '', checkerComments: '' },
+    { id: 'BATCH-0003', appCode: 'PIB', matrixType: 'CPB', uploadedBy: '123', uploadedDate: '2025-02-04T12:41:39', approvalStatus: 'Approved', makerComments: '', checkerComments: '' },
+    { id: 'BATCH-0004', appCode: 'WSM', matrixType: 'CPB', uploadedBy: '345', uploadedDate: '2025-02-04T12:42:46', approvalStatus: 'Approved', makerComments: 'Test', checkerComments: '' },
+    { id: 'BATCH-0005', appCode: 'WSM', matrixType: 'DINT', uploadedBy: 's456', uploadedDate: '2025-02-04T12:43:02', approvalStatus: 'Approved', makerComments: 'test', checkerComments: '' },
+  ];
+
   return (
-    <Card className="w-full max-w-2xl mx-auto p-6 bg-white shadow-sm animate-fade-in">
-      <div className="space-y-6">
-        <div className="space-y-2">
-          <Label htmlFor="userId">User ID</Label>
-          <Input id="userId" placeholder="Enter user ID" />
-        </div>
+    <div className="maker-container">
+      <button className="logout-button">Logout</button>
+      <h1 className="maker-title">Maker Screen</h1>
+      
+      <div className="form-group">
+        <label>User ID:</label>
+        <input type="text" className="form-control" />
+      </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="appCode">App Code</Label>
-          <Select defaultValue="SPL">
-            <SelectTrigger>
-              <SelectValue placeholder="Select app code" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="SPL">SPL</SelectItem>
-              <SelectItem value="APP1">APP1</SelectItem>
-              <SelectItem value="APP2">APP2</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+      <div className="form-group">
+        <label>App Code:</label>
+        <select className="select-control" defaultValue="SPL">
+          <option value="SPL">SPL</option>
+          <option value="APP1">APP1</option>
+          <option value="APP2">APP2</option>
+        </select>
+      </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="matrix">Matrix</Label>
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="Select matrix" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="matrix1">Matrix 1</SelectItem>
-              <SelectItem value="matrix2">Matrix 2</SelectItem>
-              <SelectItem value="matrix3">Matrix 3</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+      <div className="form-group">
+        <label>Matrix:</label>
+        <select className="select-control">
+          <option value="">Select an Matrix type</option>
+          <option value="matrix1">Matrix 1</option>
+          <option value="matrix2">Matrix 2</option>
+          <option value="matrix3">Matrix 3</option>
+        </select>
+      </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="comments">Maker Comments</Label>
-          <Textarea
-            id="comments"
-            placeholder="Enter your comments"
-            className="min-h-[100px]"
-          />
-        </div>
+      <div className="form-group">
+        <label>Maker Comments:</label>
+        <input type="text" className="form-control" />
+      </div>
 
-        <div className="flex gap-4 pt-4">
-          <Button className="flex-1">
-            <Upload className="w-4 h-4 mr-2" />
-            Upload
-          </Button>
-          <Button className="flex-1" variant="outline">
-            <Download className="w-4 h-4 mr-2" />
-            Download
-          </Button>
-          <Button className="flex-1" variant="secondary">
-            <Play className="w-4 h-4 mr-2" />
-            Test
-          </Button>
+      <div className="form-group">
+        <label>Upload Excel File:</label>
+        <div className="file-upload">
+          <input type="file" accept=".xlsx,.xls" />
+          <span>No file chosen</span>
         </div>
       </div>
-    </Card>
+
+      <div className="button-group">
+        <button className="btn btn-primary">Upload</button>
+        <button className="btn btn-primary">Download</button>
+        <button className="btn btn-primary">Test</button>
+      </div>
+
+      <table className="data-table">
+        <thead>
+          <tr>
+            <th>Select</th>
+            <th>Batch Id</th>
+            <th>App Code</th>
+            <th>Matrix Type</th>
+            <th>Uploaded By</th>
+            <th>Uploaded Date</th>
+            <th>Approval Status</th>
+            <th>Maker Comments</th>
+            <th>Checker Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          {mockData.map((row) => (
+            <tr key={row.id}>
+              <td><input type="checkbox" /></td>
+              <td>{row.id}</td>
+              <td>{row.appCode}</td>
+              <td>{row.matrixType}</td>
+              <td>{row.uploadedBy}</td>
+              <td>{row.uploadedDate}</td>
+              <td>{row.approvalStatus}</td>
+              <td>{row.makerComments}</td>
+              <td>{row.checkerComments}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <div className="table-actions">
+        <button className="btn btn-primary">Download</button>
+        <button className="btn btn-primary">ViewRecords</button>
+      </div>
+    </div>
   );
 }

@@ -1,1 +1,108 @@
-/* Add any custom styles here */
+
+.maker-container {
+  padding: 20px;
+  background-color: #fff;
+}
+
+.maker-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.form-group label {
+  width: 150px;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.form-control {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+}
+
+.select-control {
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+}
+
+.button-group {
+  margin-top: 20px;
+  margin-left: 160px;
+}
+
+.btn {
+  padding: 8px 16px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #0051ff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0045db;
+}
+
+.data-table {
+  width: 100%;
+  margin-top: 30px;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.data-table th {
+  background-color: #f4f4f4;
+}
+
+.data-table tr:nth-child(even) {
+  background-color: #f8f8f8;
+}
+
+.data-table input[type="checkbox"] {
+  margin: 0;
+}
+
+.table-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.file-upload {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logout-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #0051ff;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
