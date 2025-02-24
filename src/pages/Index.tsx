@@ -1,14 +1,35 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useState } from "react";
+import { AppSidebar } from "@/components/AppSidebar";
+import { MakerForm } from "@/components/MakerForm";
+import { cn } from "@/lib/utils";
 
 const Index = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen flex bg-gray-50">
+      <AppSidebar
+        isCollapsed={isCollapsed}
+        onToggle={() => setIsCollapsed(!isCollapsed)}
+        className="shrink-0"
+      />
+      <main
+        className={cn(
+          "flex-1 p-8 transition-all duration-300 ease-in-out",
+          isCollapsed ? "ml-16" : "ml-64"
+        )}
+      >
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-8">
+            <h1 className="text-2xl font-semibold text-gray-900">Maker Dashboard</h1>
+            <p className="text-gray-500">Create and manage your requests</p>
+          </div>
+          <MakerForm />
+        </div>
+      </main>
     </div>
   );
-};
+}
 
 export default Index;
