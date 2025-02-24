@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maker Screen</title>
+    <title>Maker-Checker Screen</title>
     <link rel="stylesheet" href="App.css">
 </head>
 <body>
@@ -20,7 +19,8 @@
         </div>
 
         <div class="main-content">
-            <div class="maker-container">
+            <!-- Maker Screen -->
+            <div class="maker-container" id="makerPage">
                 <h1 class="maker-title">Maker Screen</h1>
                 
                 <div class="form-group">
@@ -89,23 +89,59 @@
                     <button class="btn btn-primary" id="viewRecordsBtn">ViewRecords</button>
                 </div>
             </div>
+
+            <!-- Checker Screen -->
+            <div class="checker-container" id="checkerPage" style="display: none;">
+                <h1 class="checker-title">Checker Screen</h1>
+                
+                <div class="checker-instructions">
+                    <p>Below tabular structure will display the files uploaded with "Approval Status" as pending if checker has not yet approved or Approved/Rejected as checker approved.</p>
+                    <p>In case wanted to see the uploaded file, click on the radio button and view records. This view records is only enable for records status pending.</p>
+                    <p>For Approved records you can follow download existing master records steps.</p>
+                </div>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>Batch Id</th>
+                            <th>App Code</th>
+                            <th>Matrix Type</th>
+                            <th>Uploaded By</th>
+                            <th>Uploaded Date</th>
+                            <th>Approval Status</th>
+                            <th>Maker Comments</th>
+                            <th>Checker Comments</th>
+                        </tr>
+                    </thead>
+                    <tbody id="checkerTableBody">
+                    </tbody>
+                </table>
+
+                <div class="table-actions">
+                    <button class="btn btn-primary" id="downloadCheckerBtn">Download</button>
+                    <button class="btn btn-primary" id="viewRecordsCheckerBtn">ViewRecords</button>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // Mock data for the table
+        // Mock data for the tables
         const mockData = [
             { id: 'BATCH-0001', appCode: 'MSTRINT', matrixType: 'MSTRINT', uploadedBy: '123', uploadedDate: '2025-02-04T11:20:52', approvalStatus: 'Approved', makerComments: 'Test', checkerComments: '' },
             { id: 'BATCH-0002', appCode: 'SPL', matrixType: 'CPB', uploadedBy: '123', uploadedDate: '2025-02-04T12:38:18', approvalStatus: 'Approved', makerComments: '', checkerComments: '' },
             { id: 'BATCH-0003', appCode: 'PIB', matrixType: 'CPB', uploadedBy: '123', uploadedDate: '2025-02-04T12:41:39', approvalStatus: 'Approved', makerComments: '', checkerComments: '' },
+            { id: 'BATCH-0004', appCode: 'WSM', matrixType: 'CPB', uploadedBy: '345', uploadedDate: '2025-02-04T12:42:46', approvalStatus: 'Approved', makerComments: 'Test', checkerComments: '' },
+            { id: 'BATCH-0005', appCode: 'WSM', matrixType: 'DINT', uploadedBy: 's456', uploadedDate: '2025-02-04T12:43:02', approvalStatus: 'Approved', makerComments: 'test', checkerComments: '' }
         ];
 
-        // Populate table with mock data
-        function populateTable() {
-            const tableBody = document.getElementById('tableBody');
-            tableBody.innerHTML = mockData.map(row => `
+        // Populate tables with mock data
+        function populateTable(tableId, data) {
+            const tableBody = document.getElementById(tableId);
+            tableBody.innerHTML = data.map(row => `
                 <tr>
-                    <td><input type="checkbox"></td>
+                    <td><input type="${tableId === 'checkerTableBody' ? 'radio' : 'checkbox'}" name="recordSelect"></td>
                     <td>${row.id}</td>
                     <td>${row.appCode}</td>
                     <td>${row.matrixType}</td>
@@ -121,23 +157,25 @@
         // Handle sidebar navigation
         document.querySelectorAll('.sidebar-button').forEach(button => {
             button.addEventListener('click', () => {
-                // Remove active class from all buttons
+                const page = button.dataset.page;
+                
+                // Update active button
                 document.querySelectorAll('.sidebar-button').forEach(btn => {
                     btn.classList.remove('active');
                 });
-                // Add active class to clicked button
                 button.classList.add('active');
+                
+                // Show/hide pages
+                document.getElementById('makerPage').style.display = page === 'maker' ? 'block' : 'none';
+                document.getElementById('checkerPage').style.display = page === 'checker' ? 'block' : 'none';
             });
         });
 
-        // Handle file input change
-        document.getElementById('excelFile').addEventListener('change', function(e) {
-            const fileName = e.target.files[0]?.name || 'No file chosen';
-            this.nextElementSibling.textContent = fileName;
+        // Initialize tables
+        document.addEventListener('DOMContentLoaded', () => {
+            populateTable('tableBody', mockData);
+            populateTable('checkerTableBody', mockData);
         });
-
-        // Initialize table
-        document.addEventListener('DOMContentLoaded', populateTable);
     </script>
 </body>
 </html>
