@@ -8,7 +8,136 @@
     <link rel="stylesheet" href="App.css">
 </head>
 <body>
-    <div id="root"></div>
-    <script type="module" src="main.tsx"></script>
+    <div class="app-layout">
+        <div class="sidebar">
+            <div class="sidebar-content">
+                <div class="sidebar-menu">
+                    <button class="sidebar-button active" data-page="maker">Maker</button>
+                    <button class="sidebar-button" data-page="checker">Checker</button>
+                </div>
+                <button class="sidebar-logout">Logout</button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="maker-container">
+                <h1 class="maker-title">Maker Screen</h1>
+                
+                <div class="form-group">
+                    <label>User ID:</label>
+                    <input type="text" class="form-control" id="userId">
+                </div>
+
+                <div class="form-group">
+                    <label>App Code:</label>
+                    <select class="select-control" id="appCode">
+                        <option value="SPL">SPL</option>
+                        <option value="APP1">APP1</option>
+                        <option value="APP2">APP2</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Matrix:</label>
+                    <select class="select-control" id="matrix">
+                        <option value="">Select an Matrix type</option>
+                        <option value="matrix1">Matrix 1</option>
+                        <option value="matrix2">Matrix 2</option>
+                        <option value="matrix3">Matrix 3</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Maker Comments:</label>
+                    <input type="text" class="form-control" id="makerComments">
+                </div>
+
+                <div class="form-group">
+                    <label>Upload Excel File:</label>
+                    <div class="file-upload">
+                        <input type="file" accept=".xlsx,.xls" id="excelFile">
+                        <span>No file chosen</span>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-primary" id="uploadBtn">Upload</button>
+                    <button class="btn btn-primary" id="downloadBtn">Download</button>
+                    <button class="btn btn-primary" id="testBtn">Test</button>
+                </div>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>Batch Id</th>
+                            <th>App Code</th>
+                            <th>Matrix Type</th>
+                            <th>Uploaded By</th>
+                            <th>Uploaded Date</th>
+                            <th>Approval Status</th>
+                            <th>Maker Comments</th>
+                            <th>Checker Comments</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+
+                <div class="table-actions">
+                    <button class="btn btn-primary" id="downloadTableBtn">Download</button>
+                    <button class="btn btn-primary" id="viewRecordsBtn">ViewRecords</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock data for the table
+        const mockData = [
+            { id: 'BATCH-0001', appCode: 'MSTRINT', matrixType: 'MSTRINT', uploadedBy: '123', uploadedDate: '2025-02-04T11:20:52', approvalStatus: 'Approved', makerComments: 'Test', checkerComments: '' },
+            { id: 'BATCH-0002', appCode: 'SPL', matrixType: 'CPB', uploadedBy: '123', uploadedDate: '2025-02-04T12:38:18', approvalStatus: 'Approved', makerComments: '', checkerComments: '' },
+            { id: 'BATCH-0003', appCode: 'PIB', matrixType: 'CPB', uploadedBy: '123', uploadedDate: '2025-02-04T12:41:39', approvalStatus: 'Approved', makerComments: '', checkerComments: '' },
+        ];
+
+        // Populate table with mock data
+        function populateTable() {
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = mockData.map(row => `
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>${row.id}</td>
+                    <td>${row.appCode}</td>
+                    <td>${row.matrixType}</td>
+                    <td>${row.uploadedBy}</td>
+                    <td>${row.uploadedDate}</td>
+                    <td>${row.approvalStatus}</td>
+                    <td>${row.makerComments}</td>
+                    <td>${row.checkerComments}</td>
+                </tr>
+            `).join('');
+        }
+
+        // Handle sidebar navigation
+        document.querySelectorAll('.sidebar-button').forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                document.querySelectorAll('.sidebar-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                // Add active class to clicked button
+                button.classList.add('active');
+            });
+        });
+
+        // Handle file input change
+        document.getElementById('excelFile').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name || 'No file chosen';
+            this.nextElementSibling.textContent = fileName;
+        });
+
+        // Initialize table
+        document.addEventListener('DOMContentLoaded', populateTable);
+    </script>
 </body>
 </html>

@@ -196,26 +196,16 @@ body {
   font-size: 14px;
 }
 
-.logout-button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: #0051ff;
-  color: white;
-  padding: 8px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.2s;
-}
-
-.logout-button:hover {
-  background-color: #0045db;
-}
-
 /* Responsive styles */
 @media screen and (max-width: 768px) {
+  .app-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
   .form-group {
     flex-direction: column;
     align-items: flex-start;
