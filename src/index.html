@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +7,23 @@
     <link rel="stylesheet" href="App.css">
 </head>
 <body>
+    <!-- Add Dialog Box HTML -->
+    <div id="customDialog" class="dialog-overlay">
+        <div class="dialog-content">
+            <div class="dialog-header">
+                <h2>Dialog Title</h2>
+                <button class="dialog-close">&times;</button>
+            </div>
+            <div class="dialog-body">
+                <p>This is the dialog content. You can add any HTML content here.</p>
+            </div>
+            <div class="dialog-footer">
+                <button class="btn btn-primary" id="dialogOkBtn">OK</button>
+                <button class="btn btn-secondary" id="dialogCancelBtn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <div class="app-layout">
         <div class="sidebar">
             <div class="sidebar-content">
@@ -183,6 +199,40 @@
             const fileName = e.target.files[0]?.name || 'No file chosen';
             this.nextElementSibling.textContent = fileName;
         });
+
+        // Dialog functionality
+        const dialog = document.getElementById('customDialog');
+        const closeBtn = document.querySelector('.dialog-close');
+        const okBtn = document.getElementById('dialogOkBtn');
+        const cancelBtn = document.getElementById('dialogCancelBtn');
+
+        // Function to open dialog
+        function openDialog() {
+            dialog.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        // Function to close dialog
+        function closeDialog() {
+            dialog.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        // Event listeners for dialog buttons
+        closeBtn.addEventListener('click', closeDialog);
+        okBtn.addEventListener('click', closeDialog);
+        cancelBtn.addEventListener('click', closeDialog);
+
+        // Close dialog when clicking outside
+        dialog.addEventListener('click', (e) => {
+            if (e.target === dialog) {
+                closeDialog();
+            }
+        });
+
+        // Add click event to any button that should open the dialog
+        // For example, let's add it to the Upload button
+        document.getElementById('uploadBtn').addEventListener('click', openDialog);
     </script>
 </body>
 </html>
