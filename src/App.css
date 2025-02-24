@@ -1,13 +1,27 @@
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
 .maker-container {
   padding: 20px;
   background-color: #fff;
+  position: relative;
+  min-height: 100vh;
 }
 
 .maker-title {
   text-align: center;
   font-size: 24px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  color: #333;
 }
 
 .form-group {
@@ -20,20 +34,25 @@
   width: 150px;
   text-align: right;
   margin-right: 10px;
+  color: #333;
+  font-size: 14px;
 }
 
 .form-control {
-  padding: 6px 12px;
-  border: 1px solid #ccc;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
   border-radius: 4px;
-  width: 200px;
+  width: 250px;
+  font-size: 14px;
 }
 
 .select-control {
-  padding: 6px;
-  border: 1px solid #ccc;
+  padding: 8px;
+  border: 1px solid #ddd;
   border-radius: 4px;
-  width: 200px;
+  width: 250px;
+  font-size: 14px;
+  background-color: white;
 }
 
 .button-group {
@@ -42,11 +61,13 @@
 }
 
 .btn {
-  padding: 8px 16px;
+  padding: 8px 20px;
   margin-right: 10px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
 }
 
 .btn-primary {
@@ -62,29 +83,37 @@
   width: 100%;
   margin-top: 30px;
   border-collapse: collapse;
+  font-size: 14px;
 }
 
 .data-table th,
 .data-table td {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 10px;
   text-align: left;
 }
 
 .data-table th {
   background-color: #f4f4f4;
+  font-weight: bold;
+  color: #333;
 }
 
 .data-table tr:nth-child(even) {
   background-color: #f8f8f8;
 }
 
+.data-table tr:hover {
+  background-color: #f0f0f0;
+}
+
 .data-table input[type="checkbox"] {
   margin: 0;
+  cursor: pointer;
 }
 
 .table-actions {
-  margin-top: 10px;
+  margin-top: 15px;
   display: flex;
   gap: 10px;
 }
@@ -95,14 +124,57 @@
   gap: 10px;
 }
 
+.file-upload input[type="file"] {
+  font-size: 14px;
+}
+
+.file-upload span {
+  color: #666;
+  font-size: 14px;
+}
+
 .logout-button {
   position: absolute;
   top: 20px;
   right: 20px;
   background-color: #0051ff;
   color: white;
-  padding: 8px 16px;
+  padding: 8px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.logout-button:hover {
+  background-color: #0045db;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .form-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .form-group label {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 5px;
+  }
+
+  .form-control,
+  .select-control {
+    width: 100%;
+  }
+
+  .button-group {
+    margin-left: 0;
+  }
+
+  .data-table {
+    display: block;
+    overflow-x: auto;
+  }
 }
