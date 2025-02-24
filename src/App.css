@@ -10,10 +10,73 @@ body {
   background-color: #f5f5f5;
 }
 
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #333333;
+  color: white;
+  flex-shrink: 0;
+}
+
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sidebar-menu {
+  flex-grow: 1;
+  padding: 20px 0;
+}
+
+.sidebar-button {
+  width: 100%;
+  padding: 12px 24px;
+  text-align: left;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+.sidebar-button:hover {
+  background-color: #444444;
+}
+
+.sidebar-button.active {
+  background-color: #444444;
+  border-left: 4px solid #0051ff;
+}
+
+.sidebar-logout {
+  padding: 16px 24px;
+  background-color: #444444;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: left;
+  transition: background-color 0.2s;
+}
+
+.sidebar-logout:hover {
+  background-color: #555555;
+}
+
+.main-content {
+  flex-grow: 1;
+  background-color: #f5f5f5;
+}
+
 .maker-container {
   padding: 20px;
   background-color: #fff;
-  position: relative;
   min-height: 100vh;
 }
 
